@@ -1,0 +1,1 @@
+I use the images that were build in part 1 for the frontend and backend and configure them in the docker compose file.
