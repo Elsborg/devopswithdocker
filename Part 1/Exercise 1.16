@@ -1,0 +1,21 @@
+In exercise 1.16 I used the deveopsdockeruh/coursepage as the image. I built the very simple Dockerfile:
+
+FROM devopsdockeruh/coursepage
+
+Then I built the image with the command:
+
+docker build -t coursepage .
+
+Created a public repository on docker hub: elsborg/coursepage.
+
+Used the following commands on the image to push it to the newly created repository on docker hub:
+
+docker tag coursepage elsborg/coursepage
+
+docker push elsborg/coursepage
+
+Went with render as the cloud provider.
+
+Clicked new webservice and chose the option deploy a existing image from a registry and entered the url to my docker repository.
+
+The webservice url: https://coursepage-xuau.onrender.com/
