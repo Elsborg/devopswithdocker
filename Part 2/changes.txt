@@ -1,0 +1,1 @@
+Removed the port maps from the frontend and backend in docker compose file. They are no longer needed because of the reverse proxy handles it.
