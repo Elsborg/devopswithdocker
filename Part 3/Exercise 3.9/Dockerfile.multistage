@@ -1,0 +1,27 @@
+FROM golang:1.16-alpine as build-stage
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+ENV REQUEST_ORIGIN=http://localhost:5000
+
+RUN CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -o /server .
+
+RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+
+FROM scratch
+
+COPY --from=build-stage /etc/passwd /etc/group /etc/
+
+COPY --from=build-stage /server /server
+
+COPY --chown=appuser:appgroup --from=build-stage /usr/src/app /app
+
+WORKDIR /app
+
+EXPOSE 8080
+
+USER appuser
+
+CMD ["../server"]
