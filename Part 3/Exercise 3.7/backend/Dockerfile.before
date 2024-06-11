@@ -1,0 +1,15 @@
+FROM golang
+
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN go build && \
+    useradd -m appuser && \
+    chown appuser .
+
+USER appuser
+
+EXPOSE 8080
+
+CMD ["./server"]
